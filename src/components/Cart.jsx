@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux";
 import ItemList from "./ItemList";
 import { useDispatch } from "react-redux";
-import { clearCart } from "../utils/cartSlice";
+import { clearCart } from "../store/cartSlice";
 const Cart = () => {
   // We are subscribing to a particular portion of the store
   // There is no need to subscribe to the entire store like the below step

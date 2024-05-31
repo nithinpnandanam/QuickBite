@@ -1,6 +1,6 @@
 import { useDispatch } from "react-redux";
 import { CDN_URL_FOOD } from "../utils/constants";
-import { addItems } from "../utils/cartSlice";
+import { addItems } from "../store/cartSlice";
 import NoImageAvailable from "../assets/NoImageAvailable2.png"
 const ItemList = ({ menuDetails,dummy }) => {
   // UseDispatch is a hook
