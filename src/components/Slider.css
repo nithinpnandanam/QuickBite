@@ -1,0 +1,7 @@
+.slick-track .slick-slide {
+  /* @apply border-solid border-2 border-sky-500;  */
+  /* width: 193px !important; */
+}
+.slick-list .slick-track{
+    /* transform: translate3d(-987px, 0px, 0px) !important; */
+}
