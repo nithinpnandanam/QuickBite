@@ -1,5 +1,5 @@
 import RestaurantCard, { WithPromotedLabel } from "./RestaurantCard";
-import { useState, useEffect, useContext } from "react";
+import React,{ useState, useEffect, useContext } from "react";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
 import useOnlineStatus from "../utils/useOnlineStatus";
@@ -8,6 +8,12 @@ import Footer from "./Footer";
 // import FoodItems from "./FoodItems";
 import { BANNER_FOOD_URL } from "../utils/constants";
 import { MdChevronLeft, MdChevronRight } from "react-icons/md";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+
+
+
+import Slider from "react-slick";
 
 const Body = () => {
   const [listOfRestaurants, setlistOfRestaurants] = useState([]);
@@ -17,6 +23,7 @@ const Body = () => {
   const { setUserName, loggedInUser } = useContext(UserContext);
   // The variable name must not be similar to higher order component name
   const WithPromotedLabels = WithPromotedLabel(RestaurantCard);
+  const slider = React.useRef(null);
 
   useEffect(() => {
     fetchData();
@@ -42,10 +49,24 @@ const Body = () => {
   if (onlineStatus === false) {
     return (
       <div>
-        <h1>Hey there I think you are online</h1>
+        <h1>Hey there I think you are offline</h1>
       </div>
     );
   }
+
+  const settings = {
+    className: "center",
+    infinite: true,
+    centerPadding: "60px",
+    // speed: 700,
+    slidesToShow: 5,
+    swipeToSlide: true,
+    afterChange: function (index) {
+      console.log(
+        `Slider Changed to: ${index + 1}, background: #222; color: #bada55`
+      );
+    },
+  };
 
   // const slideLeft = () => {
   //   let slider = document.getElementById("slider");
@@ -61,37 +82,37 @@ const Body = () => {
     const start = element.scrollLeft;
     const change = target - start;
     const increment = 20; // Adjust as needed
-  
+
     const animateScroll = (elapsedTime) => {
       elapsedTime += increment;
       const position = easeInOut(elapsedTime, start, change, duration);
       element.scrollLeft = position;
-  
+
       if (elapsedTime < duration) {
         requestAnimationFrame(animateScroll.bind(null, elapsedTime));
       }
     };
-  
+
     const easeInOut = (t, b, c, d) => {
       t /= d / 2;
       if (t < 1) return (c / 2) * t * t + b;
       t--;
       return (-c / 2) * (t * (t - 2) - 1) + b;
     };
-  
+
     requestAnimationFrame(animateScroll.bind(null, 0));
   };
-  
+
   const slideLeft = () => {
     let slider = document.getElementById("slider");
     smoothScroll(slider, slider.scrollLeft - 500, 500);
   };
-  
+
   const slideRight = () => {
     let slider = document.getElementById("slider");
     smoothScroll(slider, slider.scrollLeft + 500, 500);
   };
-  
+
   const restaurantsInHeader = (e) => {
     const url = e.action.link;
     const pattern = /collection_id=(.*?)&type=/;
@@ -103,30 +124,38 @@ const Body = () => {
   return listOfRestaurants.length === 0 ? (
     <Shimmer />
   ) : (
-    <div>
-      <div className="w-4/5 m-auto py-10 ">
+    <div className ="">
+      <div className="w-4/5 m-auto py-10  ">
         <div className="flex justify-end pb-8">
-          <MdChevronLeft size={40} onClick={slideLeft} />
-          <MdChevronRight size={40} onClick={slideRight} />
+          <MdChevronLeft size={40} onClick={() => slider?.current?.slickPrev()} />
+          <MdChevronRight size={40} onClick={() => slider?.current?.slickNext()} />
+          {/* <button onClick={() => slider?.current?.slickPrev()}>Prev</button>
+          <button onClick={() => slider?.current?.slickNext()}>Next</button> */}
         </div>
         <div
-          className="whitespace-nowrap overflow-x-auto no-scrollbar scrollbar-hide"
+          className="slider-container border-solid border-2 "
           id="slider"
         >
+          <Slider ref={slider}  {...settings} >  
           {curatedFoods.map((element) => {
             // console.log(element)
             return (
-              <div className="w-[144px] mr-2 inline-block">
-                <Link to={"/restaurantByFood/" + restaurantsInHeader(element)}>
-                  <img
-                    src={BANNER_FOOD_URL + element.imageId}
-                    className=""
-                    alt="food_image"
-                  />
-                </Link>
-              </div>
+
+                  <div className="">
+                    <Link
+                      to={"/restaurantByFood/" + restaurantsInHeader(element)}
+                    >
+                      <img
+                        src={BANNER_FOOD_URL + element.imageId}
+                        className="w-44 h-52"
+                        alt="food_image"
+                      />
+                    </Link>
+                  </div>
+
             );
           })}
+          </Slider>
           {/* <FoodItems /> */}
         </div>
         <div className="flex justify-between pt-4 my-6">
@@ -144,22 +173,22 @@ const Body = () => {
               />
 
               <a
-              href="#_"
-              class="relative inline-flex items-center justify-center p-4 px-5 py-3 overflow-hidden font-medium text-indigo-600 transition duration-300 ease-out rounded-full shadow-xl group hover:ring-1 hover:ring-purple-500"
-              onClick={() => {
-                const filteredbySearchRest = listOfRestaurants.filter(
-                  (element) =>
-                    element.info.name
-                      .toLowerCase()
-                      .includes(searchValue.toLowerCase())
-                );
-                setfilteredRestaurants(filteredbySearchRest);
-              }}
-            >
-              <span class="absolute inset-0 w-full h-full bg-gradient-to-br from-blue-600 via-purple-600 to-pink-700"></span>
-              <span class="absolute bottom-0 right-0 block w-64 h-64 mb-32 mr-4 transition duration-500 origin-bottom-left transform rotate-45 translate-x-24 bg-pink-500 rounded-full opacity-30 group-hover:rotate-90 ease"></span>
-              <span class="relative text-white">Search</span>
-            </a>
+                href="#_"
+                class="relative inline-flex items-center justify-center p-4 px-5 py-3 overflow-hidden font-medium text-indigo-600 transition duration-300 ease-out rounded-full shadow-xl group hover:ring-1 hover:ring-purple-500"
+                onClick={() => {
+                  const filteredbySearchRest = listOfRestaurants.filter(
+                    (element) =>
+                      element.info.name
+                        .toLowerCase()
+                        .includes(searchValue.toLowerCase())
+                  );
+                  setfilteredRestaurants(filteredbySearchRest);
+                }}
+              >
+                <span class="absolute inset-0 w-full h-full bg-gradient-to-br from-blue-600 via-purple-600 to-pink-700"></span>
+                <span class="absolute bottom-0 right-0 block w-64 h-64 mb-32 mr-4 transition duration-500 origin-bottom-left transform rotate-45 translate-x-24 bg-pink-500 rounded-full opacity-30 group-hover:rotate-90 ease"></span>
+                <span class="relative text-white">Search</span>
+              </a>
             </div>
 
             <input
