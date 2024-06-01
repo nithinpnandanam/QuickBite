@@ -1,18 +1,15 @@
 import RestaurantCard, { WithPromotedLabel } from "./RestaurantCard";
-import React,{ useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
 import useOnlineStatus from "../utils/useOnlineStatus";
 import UserContext from "../utils/UserContext";
 import Footer from "./Footer";
-// import FoodItems from "./FoodItems";
 import { BANNER_FOOD_URL } from "../utils/constants";
 import { MdChevronLeft, MdChevronRight } from "react-icons/md";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-
-
-
+import "../styles/Slider.css";
 import Slider from "react-slick";
 
 const Body = () => {
@@ -45,20 +42,10 @@ const Body = () => {
     );
   };
 
-  const onlineStatus = useOnlineStatus();
-  if (onlineStatus === false) {
-    return (
-      <div>
-        <h1>Hey there I think you are offline</h1>
-      </div>
-    );
-  }
-
   const settings = {
     className: "center",
     infinite: true,
     centerPadding: "60px",
-    // speed: 700,
     slidesToShow: 5,
     swipeToSlide: true,
     afterChange: function (index) {
@@ -66,51 +53,6 @@ const Body = () => {
         `Slider Changed to: ${index + 1}, background: #222; color: #bada55`
       );
     },
-  };
-
-  // const slideLeft = () => {
-  //   let slider = document.getElementById("slider");
-  //   slider.scrollLeft = slider.scrollLeft - 500;
-  // };
-
-  // const slideRight = () => {
-  //   let slider = document.getElementById("slider");
-  //   slider.scrollLeft = slider.scrollLeft + 500;
-  // };
-
-  const smoothScroll = (element, target, duration) => {
-    const start = element.scrollLeft;
-    const change = target - start;
-    const increment = 20; // Adjust as needed
-
-    const animateScroll = (elapsedTime) => {
-      elapsedTime += increment;
-      const position = easeInOut(elapsedTime, start, change, duration);
-      element.scrollLeft = position;
-
-      if (elapsedTime < duration) {
-        requestAnimationFrame(animateScroll.bind(null, elapsedTime));
-      }
-    };
-
-    const easeInOut = (t, b, c, d) => {
-      t /= d / 2;
-      if (t < 1) return (c / 2) * t * t + b;
-      t--;
-      return (-c / 2) * (t * (t - 2) - 1) + b;
-    };
-
-    requestAnimationFrame(animateScroll.bind(null, 0));
-  };
-
-  const slideLeft = () => {
-    let slider = document.getElementById("slider");
-    smoothScroll(slider, slider.scrollLeft - 500, 500);
-  };
-
-  const slideRight = () => {
-    let slider = document.getElementById("slider");
-    smoothScroll(slider, slider.scrollLeft + 500, 500);
   };
 
   const restaurantsInHeader = (e) => {
@@ -121,52 +63,56 @@ const Body = () => {
     return extractedStringans;
   };
 
+  const onlineStatus = useOnlineStatus();
+  if (onlineStatus === false) {
+    return (
+      <div>
+        <h1>Hey there I think you are offline</h1>
+      </div>
+    );
+  }
+
   return listOfRestaurants.length === 0 ? (
     <Shimmer />
   ) : (
-    <div className ="">
+    <div className="">
       <div className="w-4/5 m-auto py-10  ">
         <div className="flex justify-end pb-8">
-          <MdChevronLeft size={40} onClick={() => slider?.current?.slickPrev()} />
-          <MdChevronRight size={40} onClick={() => slider?.current?.slickNext()} />
-          {/* <button onClick={() => slider?.current?.slickPrev()}>Prev</button>
-          <button onClick={() => slider?.current?.slickNext()}>Next</button> */}
+          <MdChevronLeft
+            size={40}
+            onClick={() => slider?.current?.slickPrev()}
+          />
+          <MdChevronRight
+            size={40}
+            onClick={() => slider?.current?.slickNext()}
+          />
         </div>
-        <div
-          className="slider-container border-solid border-2 "
-          id="slider"
-        >
-          <Slider ref={slider}  {...settings} >  
-          {curatedFoods.map((element) => {
-            // console.log(element)
-            return (
-
-                  <div className="">
-                    <Link
-                      to={"/restaurantByFood/" + restaurantsInHeader(element)}
-                    >
-                      <img
-                        src={BANNER_FOOD_URL + element.imageId}
-                        className="w-44 h-52"
-                        alt="food_image"
-                      />
-                    </Link>
-                  </div>
-
-            );
-          })}
+        <div className="slider-container border-solid border-2 " id="slider">
+          <Slider ref={slider} {...settings}>
+            {curatedFoods.map((element) => {
+              return (
+                <div className="">
+                  <Link
+                    to={"/restaurantByFood/" + restaurantsInHeader(element)}
+                  >
+                    <img
+                      src={BANNER_FOOD_URL + element.imageId}
+                      className="w-44 h-52"
+                      alt="food_image"
+                    />
+                  </Link>
+                </div>
+              );
+            })}
           </Slider>
-          {/* <FoodItems /> */}
         </div>
         <div className="flex justify-between pt-4 my-6">
           <div className="flex">
             <div className="flex items-center">
-              {/* data-testid >>>> this is the unique id that we use for selecting while testing */}
               <input
                 type="text"
                 value={searchValue}
                 className=" h-[82%] border border-gray-400 rounded pl-2 mr-2"
-                data-testid="searchInput"
                 onChange={(e) => {
                   setsearchValue(e.target.value);
                 }}
@@ -221,7 +167,6 @@ const Body = () => {
         </h1>
         <div className="flex flex-wrap gap-12">
           {filteredRestaurants.map((element) => {
-            // console.log("element", element);
             return (
               <Link key={element.info.id} to={"/restaurant/" + element.info.id}>
                 {element.info.totalRatingsString == "10K+" ? (

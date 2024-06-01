@@ -9,11 +9,7 @@ const Header = () => {
   const [headerBtn,setheaderBtn] = useState('Login')
   const onlineStatus = useOnlineStatus()
   const {loggedInUser} = useContext(UserContext)
-  // useContext is a hook that we use to acces context
-
-  // Subscribing to the store using a Selector
-  // cart is the name that we gave in cartSlice.jsx
-  // with the help of useSelector we have access to the store
+  
   const cartItems = useSelector((store)=>store.cart.items)
     return (
       <div className="flex justify-between items-center bg-gray-300">
