@@ -1,6 +1,6 @@
 import ItemList from "./ItemList";
 import arrowDown from "../assets/icons/down-arrow.png"
-const RestaurantCategory = ({ data,showItem,setshowIndexx,dummy }) => {
+const RestaurantCategory = ({ data,showItem,setshowIndexx }) => {
   // props = { data:{@type: value1, title: value2, itemCards: value3} }
   // {data} = { data:{@type: value1, title: value2, itemCards: value3} }
   const handleClick = () => {
@@ -13,13 +13,12 @@ const RestaurantCategory = ({ data,showItem,setshowIndexx,dummy }) => {
         <span>
           {data.title} ({data.itemCards.length})
         </span>
-        {/* <span>⬇</span> */}
         <div className="w-8">
           <img src={arrowDown} alt="Down arrow" />
         </div>
       </div>
       <div>
-        {showItem && <ItemList menuDetails={data.itemCards} dummy={dummy}/>}
+        {showItem && <ItemList menuDetails={data.itemCards}/>}
         {/* {menuDetails:[{},{},{},{},{}]} */}
       </div>
     </div>
