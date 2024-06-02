@@ -2,13 +2,11 @@ import { useDispatch } from "react-redux";
 import { CDN_URL_FOOD } from "../utils/constants";
 import { addItems } from "../store/cartSlice";
 import NoImageAvailable from "../assets/NoImageAvailable2.png"
-const ItemList = ({ menuDetails,dummy }) => {
-  // UseDispatch is a hook
+const ItemList = ({ menuDetails }) => {
   const dispatch = useDispatch();
   const handleAddItem = (element) =>{
     dispatch(addItems(element))
   }
-  // console.log("menuDetails",menuDetails)
   return menuDetails.map((element) => {
     return (
       <div className="flex justify-between py-4 shadow-lg mb-5 p-4 bg-gray-100" key={element.card.info.id} data-testid="foodItem">  
