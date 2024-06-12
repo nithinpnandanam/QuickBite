@@ -9,61 +9,68 @@ import RestaurantMenu from "../components/RestaurantMenu";
 import Cart from "../components/Cart";
 import RestaurantByFood from "../components/RestaurantByFood";
 import GoogleLogin from "../components/GoogleLogin";
+import ProtectedRoutes from "../components/ProtectedRoutes";
+import Login from "../components/Login";
 
 const Groceries = lazy(() => import("../components/Groceries"));
 
 const appRouter = createBrowserRouter([
-    {
-        path:"/login",
-        element:<GoogleLogin/>,
-        errorElement:<Error/>
-    },
-    {
+  {
+    path: "/login",
+    element: <GoogleLogin />,
+    errorElement: <Error />,
+  },
+  {
+    path: "/login-test",
+    element: <Login />,
+    errorElement: <Error />,
+  },
+  {
+    path: "/",
+    element: <App />,
+    errorElement: <Error />,
+    children: [
+      {
         path: "/",
-        element: <App />,
+        element: <Body />,
         errorElement: <Error />,
-        children: [
-            {
-                path: "/",
-                element: <Body />,
-                errorElement: <Error />,
-            },
-            {
-                path: "/about",
-                element: <AboutUs />,
-                errorElement: <Error />,
-            },
-            {
-                path: "/contact",
-                element: <ContactUs />,
-                errorElement: <Error />,
-            },
-            {
-                path: "/groceries",
-                element: (
-                    <Suspense fallback={<h1>Loading...</h1>}>
-                        <Groceries />
-                    </Suspense>
-                ),
-                errorElement: <Error />,
-            },
-            {
-                path: "/restaurant/:resId",
-                element: <RestaurantMenu />,
-                errorElement: <Error />,
-            },
-            {
-                path: "/cart",
-                element: <Cart />,
-                errorElement: <Error />,
-            },
-            {
-                path: "/restaurantByFood/:id",
-                element: <RestaurantByFood />,
-                errorElement: <Error />,
-            },
-        ],
-    },
+      },
+      {
+        path: "/about",
+        element: <AboutUs />,
+        errorElement: <Error />,
+      },
+      {
+        path: "/contact",
+        element: <ContactUs />,
+        errorElement: <Error />,
+      },
+      {
+        path: "/groceries",
+        element: (
+          <Suspense fallback={<h1>Loading...</h1>}>
+            <Groceries />
+          </Suspense>
+        ),
+        errorElement: <Error />,
+      },
+      {
+        path: "/restaurant/:resId",
+        element: <RestaurantMenu />,
+        errorElement: <Error />,
+      },
+      {
+        path: "/cart",
+        element: <Cart />,
+        errorElement: <Error />,
+      },
+      {
+        path: "/restaurantByFood/:id",
+        element: <RestaurantByFood />,
+        errorElement: <Error />,
+      },
+    ],
+  },
 ]);
 
 export default appRouter;

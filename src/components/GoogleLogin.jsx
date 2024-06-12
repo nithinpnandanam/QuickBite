@@ -1,29 +1,27 @@
 import GoogleButton from "react-google-button";
 import {signInWithPopup} from "firebase/auth";
 import { auth,provider } from "../utils/firebase";
+import { useDispatch } from "react-redux";
+import {checkAuthenticate} from "../store/authenticateSlice";
+import { useNavigate } from "react-router-dom";
+
 
 const GoogleLogin = () => {
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
   const handleSignInGoogle = async () => {
-    const googlePopResult = await signInWithPopup(auth, provider)
+    // const googlePopResult = await signInWithPopup(auth, provider)
     
-    googlePopResult.then((result) => {
+    await signInWithPopup(auth, provider).then((result) => {
     console.log(result);
-    // This gives you a Google Access Token. You can use it to access the Google API.
-    // const credential = GoogleAuthProvider.credentialFromResult(result);
-    // const token = credential.accessToken;
-    // The signed-in user info.
-    // const user = result.user;
-    // IdP data available using getAdditionalUserInfo(result)
-    // ...
+    if (result.user.accessToken){
+      dispatch(checkAuthenticate({"userDetail":result.user,"status":"LOGIN"}))
+      navigate("/")
+    }
+
   }).catch((error) => {
     // Handle Errors here.
-    const errorCode = error.code;
-    const errorMessage = error.message;
-    // The email of the user's account used.
-    const email = error.customData.email;
-    // The AuthCredential type that was used.
-    const credential = GoogleAuthProvider.credentialFromError(error);
-    // ...
+    console.log("Error while logging in",error)
   });
   }
   

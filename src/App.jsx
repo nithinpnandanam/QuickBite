@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { Outlet } from "react-router-dom";
-import { Provider } from "react-redux";
+// import { Provider } from "react-redux";
 import Header from "./components/Header";
 import UserContext from "./utils/UserContext";
-import appStore from "./store/appStore"
+// import appStore from "./store/appStore"
 
 const App = () => {
     const [userName, setUserName] = useState("");
@@ -15,7 +15,7 @@ const App = () => {
     }, []);
 
     return (
-        <Provider store={appStore}>
+        // <Provider store={appStore}>
             <UserContext.Provider value={{ loggedInUser: "Virat Kohli" }}>
                 <div>
                     <Header />
@@ -24,7 +24,7 @@ const App = () => {
                     </UserContext.Provider>
                 </div>
             </UserContext.Provider>
-        </Provider>
+        // </Provider>
     );
 };
 
