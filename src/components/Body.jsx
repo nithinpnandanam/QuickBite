@@ -11,6 +11,8 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "../styles/Slider.css";
 import Slider from "react-slick";
+import { useSelector } from 'react-redux';
+
 
 const Body = () => {
   const [listOfRestaurants, setlistOfRestaurants] = useState([]);
@@ -48,6 +50,7 @@ const Body = () => {
     centerPadding: "60px",
     slidesToShow: 5,
     swipeToSlide: true,
+    variableWidth: true
   };
 
   const restaurantsInHeader = (e) => {
@@ -67,6 +70,9 @@ const Body = () => {
     );
   }
 
+  const isAuthenticated = useSelector((store) => store.authenticate.isAuthenticated);
+ 
+
   return listOfRestaurants.length === 0 ? (
     <Shimmer />
   ) : (
@@ -82,7 +88,7 @@ const Body = () => {
             onClick={() => slider?.current?.slickNext()}
           />
         </div>
-        <div className="slider-container border-solid border-2 " id="slider">
+        <div className="slider-container " id="slider">
           <Slider ref={slider} {...settings} >
             {curatedFoods.map((element) => {
               return (
