@@ -8,7 +8,6 @@ import ContactUs from "../components/ContactUs";
 import RestaurantMenu from "../components/RestaurantMenu";
 import Cart from "../components/Cart";
 import RestaurantByFood from "../components/RestaurantByFood";
-import GoogleLogin from "../components/GoogleLogin";
 import ProtectedRoutes from "../components/ProtectedRoutes";
 import Login from "../components/Login";
 
@@ -17,11 +16,6 @@ const Groceries = lazy(() => import("../components/Groceries"));
 const appRouter = createBrowserRouter([
   {
     path: "/login",
-    element: <GoogleLogin />,
-    errorElement: <Error />,
-  },
-  {
-    path: "/login-test",
     element: <Login />,
     errorElement: <Error />,
   },
