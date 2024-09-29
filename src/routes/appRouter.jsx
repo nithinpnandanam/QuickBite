@@ -9,7 +9,6 @@ import RestaurantMenu from "../components/RestaurantMenu";
 import Cart from "../components/Cart";
 import RestaurantByFood from "../components/RestaurantByFood";
 import GoogleLogin from "../components/GoogleLogin";
-import ProtectedRoutes from "../components/ProtectedRoutes";
 import Login from "../components/Login";
 
 const Groceries = lazy(() => import("../components/Groceries"));

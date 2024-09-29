@@ -31,7 +31,7 @@ const Header = () => {
                }
               }>{headerBtn}</button>
             </div>
-            <li className="text-xl p-4">{loggedInUser}</li>
+            {/* <li className="text-xl p-4">{loggedInUser}</li> */}
           </ul>
         </div>
       </div>
