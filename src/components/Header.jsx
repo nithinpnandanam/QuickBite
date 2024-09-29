@@ -24,13 +24,13 @@ const Header = () => {
             <li className="text-xl p-4"><Link to="/about">About Us</Link></li>
             <li className="text-xl p-4"> <Link to="/contact">Contact Us</Link></li>
             <li className="text-xl p-4"><Link to="/cart">Cart - ({cartItems.length} items)</Link></li>
-            <div className="text-xl p-4 flex first-letter items-center">
+            {/* <div className="text-xl p-4 flex first-letter items-center">
               <button className="w-[83px] border rounded-lg border-black p-2" onClick={
                ()=>{
                 headerBtn==='Login'?setheaderBtn('Logout'):setheaderBtn('Login')
                }
               }>{headerBtn}</button>
-            </div>
+            </div> */}
             {/* <li className="text-xl p-4">{loggedInUser}</li> */}
           </ul>
         </div>
