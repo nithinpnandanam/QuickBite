@@ -28,6 +28,10 @@ npm run build
 > This project utilises [Swiggy's](https://www.swiggy.com/) real-time API.
 > To successfully send and receive API calls, you must install and use a [CORS extension](https://chromewebstore.google.com/detail/allow-cors-access-control/lhobafahddgcelffkeicbaginigeejlf?hl=en) in your browser.
 
+## Login Credentials
+- **Username:** `chandler1@gmail.com`
+- **Password:** `Chandler1!`
+  
 ## Contributing and Support
 
 Feel free to open a pull request if you can help in improving this project.
