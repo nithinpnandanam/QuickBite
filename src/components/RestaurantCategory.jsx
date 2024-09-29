@@ -8,9 +8,9 @@ const RestaurantCategory = ({ data,showItem,setshowIndexx }) => {
   };
 
   return (
-    <div className="p-4 shadow-lg mb-4 rounded bg-gray-100">
+    <div className="p-4 shadow-lg mb-4 rounded bg-gray-100 ">
       <div className="flex justify-between " onClick={handleClick}>
-        <span>
+        <span className="font-medium">
           {data.title} ({data.itemCards.length})
         </span>
         <div className="w-8">

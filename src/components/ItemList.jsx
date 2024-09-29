@@ -9,10 +9,10 @@ const ItemList = ({ menuDetails }) => {
   }
   return menuDetails.map((element) => {
     return (
-      <div className="flex justify-between py-4 shadow-lg mb-5 p-4 bg-gray-100" key={element.card.info.id} data-testid="foodItem">  
+      <div className="flex justify-between py-4  mb-5 p-4 shadow-2xl bg-gray-100 border-4 rounded-lg" key={element.card.info.id} data-testid="foodItem">  
         <div className="w-4/5">
-          <p>{element.card.info.name}</p>
-          <p>{element.card.info.description}</p>
+          <p className="pb-[13px] font-medium">{element.card.info.name}</p>
+          <p className="pb-[13px]">{element.card.info.description}</p>
           <p>₹{element.card.info.price/100}</p>
         </div>
         <div className="relative w-[215px] h-[187px]">
