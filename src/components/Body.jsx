@@ -152,7 +152,7 @@ const Body = () => {
               className="relative inline-flex items-center justify-center p-4 px-5 py-3 overflow-hidden font-medium text-indigo-600 transition duration-300 ease-out rounded-full shadow-xl group hover:ring-1 hover:ring-purple-500"
               onClick={() => {
                 const filteredbySearchRest = listOfRestaurants.filter(
-                  (element) => element.info.avgRating > 4.3
+                  (element) => element.info.avgRating > 4.5
                 );
                 setfilteredRestaurants(filteredbySearchRest);
               }}
