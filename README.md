@@ -2,7 +2,7 @@
 <p align="center">A Food Ordering app called FoodCart,It is a versatile food ordering app designed to simplify your dining experience. Quickly explore a curated selection of top-rated restaurants, filter by cuisine type, and indulge your cravings with ease</p>
 
 ## Video 
-- [Vide Demo in Youtube](https://developers.google.com/youtube/v3/getting-started)
+- [Video Demo](https://youtu.be/YCBw-LOr-5c?si=wGsn-1AvcZtwfn0H)
   
 ## Setup
 ```
@@ -28,6 +28,10 @@ npm run build
 > This project utilises [Swiggy's](https://www.swiggy.com/) real-time API.
 > To successfully send and receive API calls, you must install and use a [CORS extension](https://chromewebstore.google.com/detail/allow-cors-access-control/lhobafahddgcelffkeicbaginigeejlf?hl=en) in your browser.
 
+## Login Credentials
+- **Username:** `chandler1@gmail.com`
+- **Password:** `Chandler1!`
+  
 ## Contributing and Support
 
 Feel free to open a pull request if you can help in improving this project.
