@@ -2,7 +2,7 @@
 <p align="center">A Food Ordering app called FoodCart,It is a versatile food ordering app designed to simplify your dining experience. Quickly explore a curated selection of top-rated restaurants, filter by cuisine type, and indulge your cravings with ease</p>
 
 ## Video 
-- [Vide Demo in Youtube](https://developers.google.com/youtube/v3/getting-started)
+- Will be uploading soon
   
 ## Setup
 ```
